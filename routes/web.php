@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $post = Post::orderBy('id', 'DESC')->take(6)->get();
+    
+    return view('welcome')->with('posts',$post);
 });
+
+Route::resource('prueba','App\Http\Controllers\pruebaController');
+Route::resource('post','App\Http\Controllers\postController');
+
+
+
+Route::get('/home', function () {
+   
+    $post = Post::orderBy('id', 'DESC')->paginate(5);
+    $tags = Tag::all();
+    $categories = Category::all();
+    $qcat = $categories->count();
+    $qtag = $tags->count();
+    
+    return view('home')->with('posts',$post)->with('tags',$tags)->with('categories',$categories)->with('qcat',$qcat)->with('qtag',$qtag);    
+});
+

@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->string('subtitulo')->nullable();
             $table->text('extract');
             $table->longText('body');
             $table->enum('status',[1,2])->default(1); /* 1- Borrador 2-Publicado */

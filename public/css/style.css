@@ -1,0 +1,47 @@
+input.blog{
+    border-right: 0 !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-radius: 0;
+}
+input.blog:focus{
+    box-shadow: none !important;
+    border-right: 0 !important;
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border: 2px;
+    border-color: black;
+    border-style: solid;    
+
+}
+input.titulo{
+    margin-top: 5rem;
+    font-size: x-large;
+    border: none;
+    font-weight: 700;
+}
+input.titulo:focus{
+    box-shadow: none !important;
+}
+input.subtitulo{
+    
+    font-size: larger;
+    border: none;
+    font-weight: 500;
+}
+input.subtitulo:focus{
+    box-shadow: none !important;
+}
+.ck-editor__editable_inline{
+    padding-top: 2rem;
+    border: none!important;
+    border-bottom: 1px solid;
+}
+.ck-toolbar_grouping{
+    border: none!important;
+    background: white;
+    margin-top:3rem;
+}
+.ck-toolbar__items{
+   background: white !important;
+}
