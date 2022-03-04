@@ -92,19 +92,18 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
                 @if (session('message'))
-                    <div class="col-sm-8 mx-auto">
-                        <div class="alert alert-info text-white alert-dismissible fade show" role="alert">
-                            {{ session('message') }}
-                            <button type="button" class="btn-close align-top" data-bs-dismiss="alert" aria-label="Close"
-                                style="color:white;"><span class="align-top" aria-hidden="true">&times;</span>
-                            </button>
+                <div class="row">
+                        <div class="col-sm-8 mx-auto">
+                            <div class="alert alert-info text-white alert-dismissible fade show" role="alert">
+                                {{ session('message') }}
+                                <button type="button" class="btn-close align-top" data-bs-dismiss="alert" aria-label="Close"
+                                    style="color:white;"><span class="align-top" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                </div>
                 @endif
-            </div>
             <div class="row my-4">
                 <div class="col-lg-9 col-md-6 mb-md-0 mb-4">
                     <div class="card">
@@ -119,12 +118,12 @@
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
-                            <div class="table">
+                            <div class="table-responsive">
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr class="text-center">
                                             <th class="col-md-1 col-xs-1">#</th>
-                                            <th class="col-md-3 col-xs-3">Titulo</th>
+                                            <th class="col-md-2 col-xs-2">Titulo</th>
                                             <th class="col-md-2 col-xs-2">Estado</th>
                                             <th class="col-md-2 col-xs-2">Categoria</th>
                                             <th class="col-md-2 col-xs-2">Fecha</th>
@@ -136,19 +135,19 @@
                                             <tr>
                                                 <th class="col-md-1 col-xs-1" style="font-size: small; text-align:center">
                                                     {{ $post->id }}</th>
-                                                <td class="col-md-3 col-xs-3" style="font-size: small;"
+                                                <td class="col-md-2 col-xs-2" style="font-size: small;"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="{{ $post->subtitulo }}">{{ $post->name }}</td>
-                                                <td class="col-md-2 col-xs-2" style="font-size: small; text-align:center">
+                                                <td class="col-md-2 col-xs-2" style="font-size: small; text-align:center;">
                                                     @if ($post->status == '2') <span class="badge bg-gradient-info">Publicadpo</span> @else <span class="badge bg-gradient-secondary">Borrador</span> @endif</td>
 
-                                                <td class="col-md-2 col-xs-2" style="font-size: small;text-align:center">
+                                                <td class="col-md-2 col-xs-2" style="font-size: small;text-align:center;">
                                                     <span
                                                         class="badge bg-gradient-secondary">{{ $post->category->name }}</span>
                                                 </td>
                                                 <td class="col-md-2 col-xs-2 text-center" style="font-size: small;">
                                                     {{ date('d-m-Y', strtotime($post->created_at)) }}</td>
-                                                <td class="col-md-2 col-xs-2 text-center">
+                                                <td class="col-md-2 col-xs-2 text-center" >
                                                     <div class="btn-group dropdown">
                                                         <button type="button"
                                                             class="btn bg-gradient-default dropdown-toggle"
@@ -166,10 +165,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            
                                         @endforeach
                                     </tbody>
-                                    
                                 </table>
                                <div class="row">
                                    <div class="col-sm-5 mx-auto text-center">
@@ -221,7 +218,7 @@
                                 <div class="timeline-block mb-3">
                                     <div class="timeline-content">
                                         @foreach ($categories as $category)
-                                            <h6 class="text-dark text-sm font-weight-bold mb-0">.{{ $category->name }}
+                                            <h6 class="text-dark text-sm font-weight-bold mb-0">.{{ $category->nombre }}
                                             </h6>
                                         @endforeach
                                     </div>

@@ -6,6 +6,9 @@ use Intervention\Image\Facades\Image;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 
@@ -18,8 +21,9 @@ class PostApiController extends Controller
      */
     public function index()
     {
-      $post =  Post::all();
-      return $post;
+        $post = DB::table('posts')->join('images','images.imageable_id','=','posts.id')
+        ->join('categories','categories.id','=','posts.category_id')->select('posts.id','posts.name','posts.subtitulo','posts.body','images.url','categories.nombre')->get();
+        return $post;
     }
 
     /**
@@ -35,11 +39,11 @@ class PostApiController extends Controller
         $extencion = $archivo->getClientOriginalExtension();
         $name = $archivo->getClientOriginalName();
         $imagen = Image::make($archivo);
-        /* $imagen->resize(300,200); */ /* ancho,largo */
         $imagen->encode($extencion);
         $path = public_path('portadas/' . $name);
+        $url = 'http://rail.ar/blog/portadas/'.$name;
         $imagen->save($path);
-       
+        
         $post = new Post;
         foreach($request->category as $category);
         $user = $request->user; 
@@ -54,9 +58,14 @@ class PostApiController extends Controller
         $post->category_id = $category;
         $post->save();
         $post->image()->create([
-            'url' => $name
+            'url' => $url
         ]);
-        return response($post);
+        if($_GET['vista'] == 'web'){
+            Session::flash('message','Se creó correctamente el post '. $request->titulo);
+            return Redirect::to('home');
+        }else{
+            return response($post);
+        }
     }
 
     /**
@@ -67,9 +76,11 @@ class PostApiController extends Controller
      */
     public function show($id)
     {
-        $post =  Post::find($id);
+        $post = DB::table('posts')->join('images','images.imageable_id','=','posts.id')
+        ->join('categories','categories.id','=','posts.category_id')
+        ->select('posts.name','posts.subtitulo','posts.body','images.url','categories.nombre')->where('posts.id','=',$id)->get();
         return $post;
-    
+
     }
 
     /**

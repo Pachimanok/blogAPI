@@ -27,7 +27,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Styles -->
-    <{{-- link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}} <!-- Scripts -->
+    {{-- link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}} <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -51,10 +51,10 @@
 
 
 </head>
-
 <body style="font-family: 'Piazzolla', serif; ">
+    @include('layouts.aside')
+
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-        @include('layouts.aside')
         <div id="app" class="w-100 h-100">
             @yield('content')
         </div>

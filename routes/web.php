@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
     $post = Post::orderBy('id', 'DESC')->take(6)->get();
     
     return view('welcome')->with('posts',$post);
@@ -29,7 +31,8 @@ Route::resource('post','App\Http\Controllers\postController');
 
 Route::get('/home', function () {
    
-    $post = Post::orderBy('id', 'DESC')->paginate(5);
+    $user = Auth::user();
+    $post = Post::orderBy('id', 'DESC')->where('user_id','=',$user->id)->paginate(5);
     $tags = Tag::all();
     $categories = Category::all();
     $qcat = $categories->count();

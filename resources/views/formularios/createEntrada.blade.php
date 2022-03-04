@@ -1,11 +1,11 @@
 @extends('layouts.header')
-@include('layouts.aside')
+@section('content')
 <!-- The toolbar will be rendered in this container. -->
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-10 mx-auto">
             <h1>Crear nueva Entrada.</h1>
-            <form action="http://127.0.0.1:8000/api/posts" method="post" enctype="multipart/form-data">
+            <form action="http://127.0.0.1:8000/api/posts?vista=web" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-3 align-items-center">
                     <div class="col-sm-9"> 
@@ -25,7 +25,7 @@
                         <label for="">Categoria:</label>
                         <select name="category[]" class="form-control">
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}">{{$category->nombre}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -70,4 +70,5 @@
             console.error(error);
         });
 </script>
-@include('layouts.footer')
+</main>
+@endsection
