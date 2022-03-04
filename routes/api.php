@@ -23,3 +23,7 @@ Route::get("/test", function (){
     return 'hola weon';
 });
 Route::apiResource( name: 'posts', controller:'App\Http\Controllers\PostApiController');
+
+Route::middleware(['cors'])->group(function () {
+    Route::post('/hogehoge', 'Controller@hogehoge');
+});

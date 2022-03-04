@@ -41,3 +41,6 @@ Route::get('/home', function () {
     return view('home')->with('posts',$post)->with('tags',$tags)->with('categories',$categories)->with('qcat',$qcat)->with('qtag',$qtag);    
 });
 
+Route::middleware(['cors'])->group(function () {
+    Route::post('/hogehoge', 'Controller@hogehoge');
+});
